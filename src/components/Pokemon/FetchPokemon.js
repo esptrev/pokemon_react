@@ -4,9 +4,9 @@ import PokemonURL from "../URLs/PokemonURL";
 
 
 
-export const GetPokemon = () => {
+export const GetPokemon = ({url}) => {
     return new Promise((resolve, reject) => {
-        fetch(PokemonURL)
+        fetch(url)
             .then((response) => response.json())
             .then((data) => {
                 resolve(data);
@@ -16,7 +16,7 @@ export const GetPokemon = () => {
 
 export const GetPokemonDeets = async (url) => {
     return new Promise((resolve, reject) => {
-        fetch(PokemonURL)
+        fetch(url)
             .then((response) => response.json())
             .then((data) => {
                 resolve(data);
