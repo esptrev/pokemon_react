@@ -11,6 +11,7 @@ const [pokemon, SetPokemon] = useState([]);
         const fetchPokemon = async () => {
             let response = await GetPokemonDeets(
                 `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=20`
+
             );
             await populatePokemon(response.results);
         };
@@ -19,9 +20,10 @@ const [pokemon, SetPokemon] = useState([]);
     }, []);
 
     const populatePokemon = async (data) => {
+        console.log(data)
         let pokemonData = await Promise.all(
-            data.map(async (poke) => {
-                return await GetPokemon(poke);
+            data.map(async (pokemon) => {
+                return await GetPokemon(pokemon);
             })
         );
         SetPokemon(pokemonData);
@@ -31,7 +33,7 @@ return (
 
     <div className="pokemon-container">
         <div className="pokemon">
-            <PokemonCard {...pokemon} />
+            <PokemonCard pokemon={...pokemon} />
         </div>
     </div>
 )
