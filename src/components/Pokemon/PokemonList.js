@@ -1,45 +1,29 @@
 import React, {useEffect, useState} from "react";
-import {GetPokemon, GetPokemonDeets} from "./FetchPokemon";
+import {FetchPokemon} from "../../services/FetchPokemon";
+import PokemonURL from "../URLs/PokemonURL";
 import PokemonCard from "./PokemonCard";
 
 
 const PokemonList = () => {
+    const [pokemon, setPokemon] = useState([]);
 
-const [pokemon, SetPokemon] = useState([]);
+    const getThePokes =async () => {
+        const pokeAPIRes = await FetchPokemon(PokemonURL);
+        const resData = pokeAPIRes.data.results;
+        console.log(resData.name);
+        setPokemon(resData);
+    }
 
     useEffect(() => {
-        const fetchPokemon = async () => {
-            let response = await GetPokemonDeets(
-                `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=20`
-
-            );
-            await populatePokemon(response.results);
-        };
-        fetchPokemon();
-
+        getThePokes();
     }, []);
 
-    const populatePokemon = async (data) => {
-        console.log(data)
-        let pokemonData = await Promise.all(
-            data.map(async (pokemon) => {
-                return await GetPokemon(pokemon);
-            })
-        );
-        SetPokemon(pokemonData);
-    };
 
 return (
+    <PokemonCard>
 
-    <div className="pokemon-container">
-        <div className="pokemon">
-            <PokemonCard pokemon={...pokemon} />
-        </div>
-    </div>
+    </PokemonCard>
 )
-
-
-
 }///End of PokemonList
 
 export default PokemonList;
