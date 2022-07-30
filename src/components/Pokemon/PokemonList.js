@@ -1,28 +1,39 @@
 import React, {useEffect, useState} from "react";
-import {FetchPokemon} from "../../services/FetchPokemon";
-import PokemonURL from "../URLs/PokemonURL";
+import {FetchAllPokemon, FetchIndividualPokemon} from "../../services/FetchAllPokemon";
 import PokemonCard from "./PokemonCard";
 
 
 const PokemonList = () => {
     const [pokemon, setPokemon] = useState([]);
 
-    const getThePokes =async () => {
-        const pokeAPIRes = await FetchPokemon(PokemonURL);
-        const resData = pokeAPIRes.data.results;
-        console.log(resData.name);
-        setPokemon(resData);
-    }
-
     useEffect(() => {
-        getThePokes();
-    }, []);
+        const gatherPokemon = async () => {
+            try{
+                const response = await FetchAllPokemon('/');
+                console.log(response.data.results);
+                await populatePokemon(response.data.results);
+            }catch (error){
+                if(error.response){
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                }else{
+                    console.log(`Error: ${error.message}`)
+                }
+            }
+        }
+        gatherPokemon();
+    }, [])
 
+    const populatePokemon = async (data) =>{
+        let pokeData = await Promise.all(data.map(async (pokemon) => {
+            return FetchIndividualPokemon(pokemon.url);
+        }))
+        setPokemon(pokeData);
+    };
 
 return (
-    <PokemonCard>
-
-    </PokemonCard>
+    <PokemonCard>{pokemon}</PokemonCard>
 )
 }///End of PokemonList
 
