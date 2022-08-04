@@ -43,6 +43,7 @@ return (
             name={pokemonStats.data.name}
             image={pokemonStats.data.sprites.front_default}
             type={pokemonStats.data.types[0].type.name}
+            weight={pokemonStats.data.weight}
         />
     )}
     </div>

@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 4px;
 }
 
 .spriteImages{
@@ -17,4 +18,16 @@
 
 .detail_wrapper{
     text-align: center;
+}
+
+.card_header{
+    display: flex;
+    justify-content: space-between;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.poke_ball{
+    width: 10px;
+    height: 10px;
 }
