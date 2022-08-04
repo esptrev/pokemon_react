@@ -1,11 +1,11 @@
 import './components/Pokemon/PokemonList.js';
-import './App.css';
 import PokemonList from "./components/Pokemon/PokemonList";
+import classes from "./App.module.css";
 
 function App() {
   return (
-    <div className="App">
-     <div>
+    <div className={classes.app}>
+     <div className={classes.pokeCardContainer}>
        <PokemonList/>
      </div>
 
