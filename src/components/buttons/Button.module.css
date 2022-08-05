@@ -1,0 +1,20 @@
+.button {
+    border: 1px solid cornflowerblue;
+    background: ghostwhite;
+    color: black;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    width: 8rem !important;
+    height: 2rem;
+
+}
+
+.button:hover,
+.button:active {
+    background: #741188;
+    border-color: #741188;
+}
+
+.button:focus {
+    outline: none;
+}

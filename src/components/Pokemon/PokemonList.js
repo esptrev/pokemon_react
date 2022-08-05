@@ -7,23 +7,24 @@ import classes from "./PokemonList.module.css";
 const PokemonList = () => {
     const [pokemon, setPokemon] = useState([]);
 
-    const gatherPokemon = async () => {
-        try{
-            const response = await FetchAllPokemon('/');
-            console.log(response.data.results);
-            await populatePokemon(response.data.results);
-        }catch (error){
-            if(error.response){
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-            }else{
-                console.log(`Error: ${error.message}`)
-            }
-        }
-    }
+
 
     useEffect(() => {
+        const gatherPokemon = async () => {
+            try{
+                const response = await FetchAllPokemon('/?limit=20&offset=0');
+                console.log(response.data);
+                await populatePokemon(response.data.results);
+            }catch (error){
+                if(error.response){
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                }else{
+                    console.log(`Error: ${error.message}`)
+                }
+            }
+        }
         gatherPokemon();
     }, [])
 

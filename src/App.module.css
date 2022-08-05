@@ -6,3 +6,9 @@
     justify-content: flex-start;
 
 }
+.button_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
